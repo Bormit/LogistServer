@@ -5,11 +5,13 @@ import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
+
+import scala.concurrent.ExecutionContextExecutor
 import scala.io.StdIn
 
 object Main extends App {
-  implicit val system = ActorSystem(Behaviors.empty, "my-system")
-  implicit val executionContext = system.executionContext
+  implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "my-system")
+  implicit val executionContext: ExecutionContextExecutor = system.executionContext
 
   private var mem: Double = 0.0
   private var lastResult: Double = 0.0
